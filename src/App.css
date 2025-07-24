@@ -1,42 +1,515 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #22bdce;
+  color: #333;
+ 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 20px;
+  max-width: 1200px; 
+  margin: 20px auto; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+
+  }
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+
+.card {
+  background-color: #e0f7fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-bottom: 20px;
+
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* --- Header Styles --- */
+.dashboard-header {
+  background-color: #ffffff;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  font-size: 1.8em;
+  color: #333;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.app-subtitle {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.header-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 25px;
+  
+  justify-content: flex-end;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  white-space: nowrap;
+  gap: 5px;
+}
+
+.status-indicator,
+.last-update-info,
+.sun-time-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85em;
+  color: #555;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #28a745;
+  margin-right: 5px;
+}
+.sun-times-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.buttons-group {
+  display: flex;
+  gap: 8px;
+}
+.refresh-button,
+.settings-button {
+  background-color: #f0f2f5;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.refresh-button:hover,
+.settings-button:hover {
+  background-color: #e0e2e5;
+  border-color: #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.analysis-subtitle-card {
+  display: inline-block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.analysis-subtitle {
+  font-size: 1.2em;
+  color: #555;
+  margin: 0;
+  text-align: center;
+
+}
+.key-indicators-section .card-title {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.indicators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 20px;
+
+}
+
+.key-indicator-card {
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
+
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center; /* Centra el contenido horizontalmente */
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.key-indicator-card:hover {
+  transform: translateY(-5px);
+  /* Pequeño efecto de elevación al pasar el ratón */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  /* Sombra más pronunciada al pasar el ratón */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Colores de borde para las tarjetas según el diseño (tus reglas existentes) */
+.key-indicator-card:nth-child(1) {
+  border-top: 5px solid #ff7043;
+  /* Naranja */
+}
+
+.key-indicator-card:nth-child(2) {
+  border-top: 5px solid #0888c3;
+  /* Azul claro */
+}
+
+.key-indicator-card:nth-child(3) {
+  border-top: 5px solid #ab47bc;
+  /* Morado */
+}
+
+.key-indicator-card:nth-child(4) {
+  border-top: 5px solid #66bb6a;
+  /* Verde */
+}
+/* Header de la tarjeta */
+.indicator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  /* Espacio debajo del encabezado */
+  padding-bottom: 8px;
+
+}
+
+.indicator-label-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  /* 14px */
+  font-weight: 500;
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
+  color: inherit;
+  /* Hereda el color blanco de .key-indicator-card */
+}
+
+/* Estilo para el icono dentro de la tarjeta de indicador */
+.key-indicator-card .icon {
+  /* Selector para tu componente Icon */
+  font-size: 28px;
+  /* Tamaño del icono */
+  line-height: 1;
+  /* Para alinear verticalmente el emoji */
+  color: inherit;
+  /* Hereda el color blanco */
+}
+
+/* Contenido principal de la tarjeta (el valor y la unidad) */
+.indicator-content-body {
+  padding-top: 16px;
+}
+
+.indicator-value-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Espacio vertical entre el valor y el badge */
+}
+
+.indicator-value-main {
+  font-size: 2rem;
+  /* 32px */
+  font-weight: bold;
+  line-height: 1;
+  color: inherit;
+}
+
+.indicator-unit-badge {
+  /* Emula el "Badge" */
+  font-size: 0.75rem;
+  /* 12px */
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Fondo semitransparente blanco */
+  color: white;
+  /* Texto blanco para el badge */
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  /* Para que el padding y border-radius funcionen bien */
+}
+
+.indicator-change {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 5px;
+  color: inherit;
+  /* Hereda el color blanco */
+}
+.temporal-analysis-section {
+  margin: 0 auto; /* ¡Centra el bloque horizontalmente! */
+  max-width: 800px; /* ¡Define un ancho máximo para que margin: auto funcione! */
+  width: 100%; /* Asegura que ocupe el ancho disponible hasta el max-width */
+}
+
+/* --- TemporalAnalysisSection --- */
+.temporal-analysis-section .card-title {
+  margin-bottom: 10px;
+}
+
+.chart-placeholder-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.chart-subtitle {
+  font-size: 15px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.chart-area-placeholder {
+  height: 250px;
+  /* Altura para el gráfico */
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-style: italic;
+  margin-bottom: 30px;
+  border: 1px dashed #e0e0e0;
+}
+
+/* --- HourlyForecastTable --- */
+.hourly-forecast-table-container {
+  margin-top: 20px;
+  width: 100%; 
+}
+
+.hourly-forecast-table-container h3 {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 15px;
+  text-align: center; 
+}
+
+.hourly-table-wrapper {
+  overflow-x: auto;
+
+  border: 1px solid #eee;
+  /* Borde alrededor de la tabla */
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.hourly-forecast-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px;
+}
+
+.hourly-forecast-table-container th,
+.hourly-forecast-table-container td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.hourly-forecast-table-container th {
+  background-color: #f7f7f7;
+  /* Color de fondo para encabezados */
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.hourly-forecast-table-container td {
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.hourly-forecast-table-container tr:last-child td {
+  border-bottom: none;
+}
+
+.hourly-forecast-table-container tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.hourly-forecast-table-container .weather-description {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* --- Pantalla de Carga y Error --- */
+.loading-screen,
+.error-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 24px;
+  color: #666;
+  background-color: #f0f2f5;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-screen {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* --- Media Queries (para responsividad) --- */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    /* Alinea el contenido a la izquierda en móvil */
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header-left {
+    width: 100%;
+    margin-bottom: 10px;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .header-right {
+    flex-direction: column;
+    /* Apila los elementos verticalmente en móvil */
+    align-items: flex-start;
+    /* Alinea a la izquierda en móvil */
+    gap: 10px;
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .info-group {
+    align-items: flex-start;
+    /* Alinea el texto a la izquierda dentro del grupo en móvil */
+  }
 
-.read-the-docs {
-  color: #888;
+  .status-indicator,
+  .last-update-info,
+  .sun-time-item {
+    width: 100%;
+    /* Ocupa todo el ancho disponible en móvil */
+    justify-content: flex-start;
+    /* Alinea el texto a la izquierda en móvil */
+    margin-bottom: 5px;
+    /* Más espacio entre elementos en móvil */
+  }
+
+  .buttons-group {
+    width: 100%;
+    flex-direction: row;
+    /* Mantener botones en fila en móvil si caben */
+    justify-content: space-around;
+    /* Distribuye los botones */
+  }
+
+  .refresh-button,
+  .settings-button {
+    flex-grow: 1;
+ 
+    width: auto;
+
+    margin: 0;
+
+  }
 }

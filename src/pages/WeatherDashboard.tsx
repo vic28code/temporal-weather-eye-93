@@ -18,8 +18,8 @@ import type {
 import { generateConditions } from '../functions/ConditionGenerator';
 import { generateKeyIndicators } from '../functions/KeyIndicatorGenerator';
 
-import './index.css';
-import './App.css';
+import '../index.css';
+import '../App.css';
 
 function WeatherDashboard() {
     // Ubicaciones configuradas para provincias de Ecuador
